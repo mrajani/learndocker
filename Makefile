@@ -1,17 +1,19 @@
 .PHONY: up down start stop cleanContainers clean
 
 up:
-  docker-compose up $(opts)
+	docker-compose up $(opts)
 
 down:
-  docker-compose down $(opts)
+	docker-compose down $(opts)
 
 start:
-  docker-compose up -d $(opts)
+	docker-compose up -d $(opts)
 
-cleanContainers:
-  docker-compose rm --force
+cc:
+	docker-compose rm --force
 
-cleanVolumes:
-  rm -rf volumes
+cv:
+	rm -rf volumes
+
+clean: cc cv
 
