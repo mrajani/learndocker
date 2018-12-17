@@ -35,7 +35,7 @@ if [[ ${os} == "centos" ]]; then
   #sudo yum-config-manager --disable docker-ce-edge
   sudo yum install -y docker-ce
   sudo usermod -aG docker ${user}
-  sudo yum install -y epel-release docker-compose
+  sudo yum install -y epel-release
   #yum list docker-ce --showduplicates | sort -r
   #sudo yum install docker-ce-<VERSION STRING>
   sudo systemctl start docker
@@ -52,9 +52,18 @@ elif [[ ${os} == "ubuntu" ]]; then
   sudo apt -yqq update 
   sudo apt install -y docker-ce
   sudo usermod -aG docker ${user}
-  sudo apt-get -y install python-pip docker-compose
+  sudo apt-get -y install python-pip
 else
   echo "Cannot identify the OS"
 fi
+
 sudo systemctl status docker --no-pager
 sudo docker container run --rm hello-world
+
+DC_URL=https://github.com/docker/compose/releases/download
+DC_VER=1.23.2
+sudo curl -sSL "${DC_URL}/${DC_VER}/docker-compose-$(uname -s)-$(uname -m)" \
+     -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+

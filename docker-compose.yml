@@ -1,3 +1,13 @@
-mytest:
-  image: hello-world
-
+version: '3'
+##  Demonstrate mandatory varirable subsbitution
+services:
+  myalpine:
+   build:
+     context: .
+   image: myalpine:${TAG:?Enter a valid tag}
+   command: sh -c '/bin/bash'
+   build:
+     context: .
+     dockerfile: Dockerfile
+     args:
+       VERSION: ${OS:?ENTER A VERSION}
