@@ -45,14 +45,14 @@ elif [[ ${os} == "ubuntu" ]]; then
   sudo apt-get remove docker docker-engine docker.io
   sudo apt-get -yqq update
   sudo DEBIAN_FRONTEND=noninteractive apt-get -yqq upgrade
-  sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+  sudo apt-get -yq install apt-transport-https ca-certificates curl software-properties-common
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   sudo apt-key fingerprint 0EBFCD88
   sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   sudo apt -yqq update 
-  sudo apt install -y docker-ce
+  sudo apt install -yqq docker-ce
   sudo usermod -aG docker ${user}
-  sudo apt-get -y install python-pip
+  sudo apt-get -yqq install python-pip
 else
   echo "Cannot identify the OS"
 fi
