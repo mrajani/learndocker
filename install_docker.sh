@@ -1,7 +1,6 @@
-
 #!/bin/bash
 
-user=${1:-vagrant}
+user=${1:-$(logname)}
 
 if [[ ( -z ${os} && -z ${dist} ) ]]; then
   if [ -e /etc/os-release ]; then
