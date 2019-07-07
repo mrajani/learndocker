@@ -52,6 +52,11 @@ elif [[ ${os} == "ubuntu" ]]; then
   sudo apt install -yqq docker-ce
   sudo usermod -aG docker ${user}
   sudo apt-get -yqq install python-pip
+elif [[ ${os} == "amzn" ]]; then
+  sudo amazon-linux-extras install docker
+  sudo systemctl start docker
+  sudo systemctl enable docker
+  sudo usermod -aG docker ${user}
 else
   echo "Cannot identify the OS"
 fi
