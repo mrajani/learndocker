@@ -64,9 +64,10 @@ fi
 sudo systemctl status docker --no-pager
 sudo docker container run --rm hello-world
 
-DC_URL=https://github.com/docker/compose/releases/download
-DC_VER=1.23.2
-sudo curl -sSL "${DC_URL}/${DC_VER}/docker-compose-$(uname -s)-$(uname -m)" \
+url=https://github.com/docker/compose/releases
+url_effective=$(curl -sSL -I -o /dev/null -w %{url_effective} ${url}/latest)
+tag=${url_effective##*/}
+sudo curl -sSL "${url}/download/${tag}/docker-compose-$(uname -s)-$(uname -m)" \
      -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
